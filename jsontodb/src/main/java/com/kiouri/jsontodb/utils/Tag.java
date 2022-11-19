@@ -23,7 +23,8 @@ public class Tag {
 	}
 		
 		
-	public boolean isСontainsTag(Tag tag2) {
+	public boolean isContainsTag(Tag tag2) {
+		
 		Set<String> tag1AttrNamesSet = tgAttrNamesToSet(this);
 		Set<String> tag2AttrNamesSet = tgAttrNamesToSet(tag2);
 		if (tag1AttrNamesSet.containsAll(tag2AttrNamesSet)) {

@@ -41,7 +41,7 @@ public class DataLoader {
 	public List<String> getInsSQLStmtsAsList(String myjson, List<Tag> inDDLTags,  String jobID) throws Exception {
 		JSONObject obj = new JSONObject(myjson);
 		this.ddlTags = inDDLTags;
-		//готовим list tag'ов c с данными, но без учета специфики БД 
+		//Preparing tag list without db  specific
 		recursiveLoader(Utils.ROOTTAGNAME , obj, "", jobID);		
 		List<String> insertStmts = new ArrayList<String>();		
 		for (Tag tag : tags) {
@@ -82,7 +82,7 @@ public class DataLoader {
 	
 	
 	/**
-	 * создаем tags и заполняем его значениями без учета SQL специфики конкретного типа БД
+	 * Create and  fill tags list without db specific
 	 */
 	private void recursiveLoader(String jsonObjname, JSONObject jsonObj, String parentID, String jobID) {
 		List <String[]> columns = new ArrayList<String[]>();
@@ -159,7 +159,7 @@ public class DataLoader {
 		return lineID;
 	}
 	
-	// содержится ли атрибут tag'а c среди атрибутов DDL tag'а 
+	// is exists tag attribute in DDL tag attributes 
 	boolean isDdlAttrsContainsAttr(List<String[]> ddlAttrs, String[] attr) {
 		for (String[] ddlAttr : ddlAttrs) {
 			if (ddlAttr[0].equals(attr[0])) {

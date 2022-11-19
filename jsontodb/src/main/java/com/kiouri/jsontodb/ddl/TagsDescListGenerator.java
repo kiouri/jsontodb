@@ -66,14 +66,15 @@ public class TagsDescListGenerator {
 	/**
 	 * Entry point
 	 * 
-	 * @param pathToJson       Path to Json file
-	 * @param prevTagsDescList Path to the file with results of processing a
-	 *                         previous json file of similar structure. It can be
-	 *                         null if this is the first parsing of a json file of
-	 *                         this type, or if it is not necessary to maintain a
-	 *                         consistent database structure for a set of similar
-	 *                         json files, which may have some differences in
-	 *                         structure (e.g., one-time parsing of files).
+	 * @param pathToJson             Path to Json file
+	 * @param pathToPrevTagsDescList Path to the file with results of processing a
+	 *                               previous json file of similar structure. It can
+	 *                               be null if this is the first parsing of a json
+	 *                               file of this type, or if it is not necessary to
+	 *                               maintain a consistent database structure for a
+	 *                               set of similar json files, which may have some
+	 *                               differences in structure (e.g., one-time
+	 *                               parsing of files).
 	 * @return Serialized as string a list of descriptors for the child json objects
 	 *         of the parent json object.
 	 * @throws IOException
@@ -186,7 +187,7 @@ public class TagsDescListGenerator {
 			List<Tag> sameLevelOldTags = getTagsByPath(oldTags, currentPathToTag);
 			for (Tag currentOldTag : sameLevelOldTags) {
 				// The new tag contains all the attributes of the old one and maybe a little more
-				if(newTag.isСontainsTag(currentOldTag)) {
+				if(newTag.isContainsTag(currentOldTag)) {
 					newTag.sqlName = currentOldTag.sqlName;
 					for (String[] newAttr : newTag.attrs) {
 						String[] correspondOldAttr = getAttrByName(currentOldTag.attrs, newAttr[0]);
@@ -196,7 +197,7 @@ public class TagsDescListGenerator {
 					}
 					usedOldTags.add(currentOldTag);
 					//The old tag contains all the attributes of the new one and maybe a little more
-				} else if (currentOldTag.isСontainsTag(newTag)) {
+				} else if (currentOldTag.isContainsTag(newTag)) {
 					newTag.attrs = currentOldTag.attrs;
 					usedOldTags.add(currentOldTag);
 				}
@@ -252,7 +253,7 @@ public class TagsDescListGenerator {
 				replasedTag = resultTag;
 				String tagPath = tag.getTagPathAsString();
 				String resultTagPath = resultTag.getTagPathAsString();
-				if (tagPath.equals(resultTagPath) && resultTag.isСontainsTag(tag)) {
+				if (tagPath.equals(resultTagPath) && resultTag.isContainsTag(tag)) {
 					exists = true;
 					break;
 				}

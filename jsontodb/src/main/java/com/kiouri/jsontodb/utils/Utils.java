@@ -110,25 +110,25 @@ public class Utils {
 		return result;
 	}
 	    
-    //Возвращаем Tag, который заменит удаляемый (или null, если замены нет)
+	//Return the Tag that will replace the one being removed (or null if there is no replacement)
     public static Tag isWiderTagWithSamePathConteinsInList(Tag tag, List<Tag> tags) {
     	if (tags == null) {
     		return null;
     	}
     	for (Tag tagFromList : tags) {
-    		//не сравниваем tag'и с разными путями
+    		//do not compare tags with different paths
         	if(!tag.getTagPathAsString().equals(tagFromList.getTagPathAsString())) {
         		continue;
         	}    		
-            //не сравниваем tag'и с разными именами
+            //do not compare tags with different names
     		if(!tag.tagName.equals(tagFromList.tagName)) {
     			continue;
     		}
-    		//если у tag'а из списка меньше атрибутов, чем у рассматриваемого - он тоже не подходит
+    		//If a tag from the list has fewer attributes than the one in question, it is also ineligible
     		if(tag.attrs.size() > tagFromList.attrs.size()) {
     			continue;
     		}
-    		//проверяем, что для каждого атрибута обрабатываемого tag'а есть аналогичный у tag'а из списка
+    		//check that for each attribute of the processed tag there is a similar one for the tag from the list
     		boolean cirrentTagFromLisrtIsValid = true;
     		for (String[] attrEl : tag.attrs) {
     			boolean attrExists = false;
@@ -138,7 +138,9 @@ public class Utils {
     					break;
     				}
     			}
-    			if(!attrExists) { //если какой-то атрибут не существует в tag'е расширенного списка, то надо переходить к след. элемениу расширенного списка
+    			//If some attribute doesn't exist in the tag of 
+    			//the expanded list, then we have to go to the next element of the expanded list
+    			if(!attrExists) { 
     				cirrentTagFromLisrtIsValid = false;
     				break;
     			}
@@ -150,10 +152,10 @@ public class Utils {
     	return null;
     }
     
-    /**
-     * Удаление tag'а, если есть другой tag с такимже путем, но 
-     * с идентичным или более широким набором атрибутов !!!  
-     */
+	/**
+	 * Removing a tag if there is another tag with the same path, but with identical
+	 * or wider set of attributes !!!
+	 */
     public static List<Tag> removeNarrowTagsWithSamePath(List<Tag> tags){
     	List<Tag> resultTags = new ArrayList<Tag>();
     	for (Tag tag : tags) {
